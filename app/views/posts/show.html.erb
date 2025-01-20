@@ -1,0 +1,28 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<h1><%= @post.title %></h1>
+<p><%= @post.content %></p>
+<p><strong>Published:</strong> <%= @post.published ? "Yes" : "No" %></p>
+<h2>Comments</h2>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <li>
+      <strong><%= comment.user_id%>:</strong>
+      <%= comment.body %>
+    </li>
+  <% end %>
+</ul>
+<p>
+  <strong>Tags:</strong>
+  <% @post.tags.each do |tag| %>
+    <span><%= tag.title%></span>
+  <% end %>
+</p>
+
+
+<%= link_to "Edit", edit_post_path(@post) %>
+<%= link_to "Back to Posts", posts_path %>
+<%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
