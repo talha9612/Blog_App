@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable
   has_and_belongs_to_many :tags
 
   validates :title, presence: { message: "Title can't be blank" }, length: { maximum: 255 }

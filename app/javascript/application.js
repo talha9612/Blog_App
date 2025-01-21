@@ -5,3 +5,6 @@ import "@rails/ujs";
 
 // Rails.start();
 
+
+import "trix"
+import "@rails/actiontext"

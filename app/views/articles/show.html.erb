@@ -1,0 +1,25 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+<h1><%= @article.title %></h1>
+<p><%= @article.content %></p>
+<ul>
+  <% @article.comments.each do |comment| %>
+    <li>
+      <strong><%= comment.user_id%>:</strong>
+      <%= comment.body %>
+    </li>
+  <% end %>
+</ul>
+<p>
+  <strong>Tags:</strong>
+  <% @article.tags.each do |tag| %>
+    <span><%= tag.title%></span>
+  <% end %>
+</p>
+
+<%= link_to "Edit", edit_article_path(@article) %>
+<%= link_to "Back to Articles", articles_path %>
+<%= link_to "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>
