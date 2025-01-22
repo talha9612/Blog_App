@@ -5,14 +5,7 @@
 <% end %>
 <h1><%= @article.title %></h1>
 <p><%= @article.content %></p>
-<ul>
-  <% @article.comments.each do |comment| %>
-    <li>
-      <strong><%= comment.user_id%>:</strong>
-      <%= comment.body %>
-    </li>
-  <% end %>
-</ul>
+<%= render partial: "comments", locals: { article: @article }%>
 <p>
   <strong>Tags:</strong>
   <% @article.tags.each do |tag| %>
