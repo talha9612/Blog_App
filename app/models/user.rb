@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :comments, dependent: :destroy
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "is not a valid email" }
+
+  def admin?
+    admin
+  end
 end

@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   # get "posts/update"
   # get "posts/destroy"
   root "posts#index"
-  resources :posts
+  # Public routes
+  resources :posts, only: [ :index, :show ]
+  resources :comments
+  namespace :admin do
+    root "admin/posts#index"
+    resources :posts
+  end
   #  get "/test/:id", to: "posts#show"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,15 +23,19 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+ # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
+ # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+ # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
-  # get 'posts/:id', to: 'posts#show', as: 'post'
-  # patch 'posts/:id', to: 'posts#update'
+ # Defines the root path route ("/")
+ # root "posts#index"
+ # get 'posts/:id', to: 'posts#show', as: 'post'
+ # patch 'posts/:id', to: 'posts#update'
 
 
-  resources :articles
+ # resources :articles
+ resources :articles, only: [ :index, :show ]
+  namespace :admin do
+    resources :articles
+  end
 end
