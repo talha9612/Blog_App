@@ -14,14 +14,7 @@ class Admin::PostsController < ApplicationController
     end
 
     def create
-      # @post = Post.new(post_params)
-      # if @post.save
-      #   redirect_to @post, notice: "Post was successfully created."
-      # else
-      #   # Explicitly render the new view if there are errors
-      #   render :new, status: :unprocessable_entity
-      # end
-      @post = Post.new(post_params)
+    @post = Post.new(post_params)
       puts @post
     if @post.save
       redirect_to admin_post_path(@post), notice: "Blog post created successfully."
@@ -35,7 +28,7 @@ class Admin::PostsController < ApplicationController
 
     def update
       if @post.update(post_params)
-        redirect_to @post, notice: "Post was successfully updated."
+        redirect_to admin_post_path(@post), notice: "Post was successfully updated."
       else
         render :edit
       end

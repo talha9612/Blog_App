@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_22_081951) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_22_114324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -101,7 +101,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_22_081951) do
     t.datetime "published_at", precision: nil
     t.datetime "published_at1"
     t.string "slug"
+    t.integer "parent_id"
     t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["parent_id"], name: "index_posts_on_parent_id"
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|

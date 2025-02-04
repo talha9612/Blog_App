@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
   has_many :comments, as: :commentable
   has_and_belongs_to_many :tags
+  belongs_to :parent, class_name: "Post", optional: true
+
+  has_many :children, class_name: "Post", foreign_key: "parent_id", dependent: :destroy
 
   validates :title, presence: { message: "Title can't be blank" }, length: { maximum: 255 }
   validates :content, presence: true
@@ -10,6 +13,9 @@ class Post < ApplicationRecord
   around_save :log_and_cleanup
   # before_save :check_title_change
   after_save :check_for_title_change
+
+
+
   private
   def log_and_cleanup
     Rails.logger.info("Saving Post: #{self.title}")

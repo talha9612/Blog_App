@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   root "posts#index"
   # Public routes
   resources :posts, only: [ :index, :show ]
-  resources :comments
   namespace :admin do
     root "admin/posts#index"
-    resources :posts
+    resources :posts do
+      resources :comments, only: [ :create, :index ]
+    end
   end
   #  get "/test/:id", to: "posts#show"
 
@@ -31,11 +32,15 @@ Rails.application.routes.draw do
  # root "posts#index"
  # get 'posts/:id', to: 'posts#show', as: 'post'
  # patch 'posts/:id', to: 'posts#update'
-
+ #  scope :admin do
+ #   resources :posts
+ # end
 
  # resources :articles
  resources :articles, only: [ :index, :show ]
   namespace :admin do
-    resources :articles
+    resources :articles do
+      resources :comments, only: [ :create, :index ]
+    end
   end
 end
